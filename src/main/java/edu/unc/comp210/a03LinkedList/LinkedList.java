@@ -23,6 +23,26 @@ public class LinkedList {
      */
     public void simpleMerge(LinkedList list2) {
         //TODO
+        // if the list is empty then nothing happens
+        if (list2.isEmpty()){
+            return;
+        }
+        // the current list is empty
+        if(this.isEmpty()){
+            _tail = list2._tail;
+            _head = list2._head;
+            // this means that the list2 head will be the current list head; etc
+        }
+        // when both the list contains something
+        else {
+            list2._tail.setNext(_head); // setting the list's tail to the current head, so it
+            // has that in reference
+            _head = list2._head;
+            //tail stays the same
+        }
+        _size += list2.size() ;
+        list2.clear(); // clears all the content in list2
+
     }
 
     /**
@@ -40,6 +60,34 @@ public class LinkedList {
      */
     public void removeAtIndex(int i) {
         // TODO
+        validIndex(i); // method that will check if it's out of bounds or below 0/1
+        // throws the indexOutofBounds Exception
+        if (i == 0){
+            _head = _head.getNext(); // since it's removing at index 0, new head is the next value
+            // if there is no head, then make sure that the tail also doesn't have a value
+            if(_head == null){
+                _tail = null;
+            }
+        }
+        else{
+            Node prev = _head;
+            // loops through the whole list, and gets the value before the index i (k = i -1)
+            for(int k = 0; k < i -1; k++){
+                prev = prev.getNext(); // the node before i
+            }
+            Node tem = prev.getNext(); // storing the next value (desired index)
+            prev.setNext(tem.getNext()); // the temp next value, which is the the one that needs to be linked
+            // since tem.getNext() will equal null, then it won't throw an error / and the tail is stored as the last value of the
+            // node list
+            // while the head is the first item of the hode list
+
+            // the one that you want to remove, so set the previous node as the tail now
+            if(tem == _tail){
+                _tail = prev;
+            }
+            _size --;
+        }
+
 
     }
 
@@ -61,7 +109,18 @@ public class LinkedList {
      */
     public boolean isEqual(LinkedList list2) {
         // TODO
-
+        if(this._size == list2._size && list2 != null){
+            Node a = _head;
+            Node b = list2._head;
+            while (b != null){
+                if (a.getValue() != b.getValue()){
+                    return false;
+                }
+                a = a.getNext();
+                b = b.getNext();
+            }
+            return true;
+        }
         return false;    // Change this statement as required
     }
 
@@ -72,12 +131,29 @@ public class LinkedList {
      *     list after removeRepeats: 5 -> 6 -> 7 -> 8 -> 9
      *
      */
+    // just remove the repeated numbers so it'll be just single numbers
     public void removeRepeats() {
         // TODO
+        Node cur = _head;
+        //loops through the whole thing
+        while (cur != null && cur.getNext() != null){
+            //If they're the same, then have to remove the repeat,
+            if (cur.getValue() == cur.getNext().getValue()){
+                if(cur.getNext() == _tail){
+                    _tail = cur; // so the tail is now the current one
+                }
+                // remove the repeat and point to new object
+                cur.setNext(cur.getNext().getNext());
+            }
+            //since this means that the values ajacent isn't equal
+            else {
+                cur = cur.getNext(); // goes through the whole list e
+            }
 
+        }
     }
 
-     /**
+    /**
      * Task 5
      * Reverse the list.
      * eg list:  10 -> 9 -> 8 -> 7
@@ -85,6 +161,18 @@ public class LinkedList {
      */
     public void reverse() {
         // TODO
+        Node prev = null;
+        Node cur = _head; // starting from the beginning to reverse the order
+        _tail = _head; // since the tail will now have the starting value
+        while(cur != null){
+            Node newNode = cur.getNext(); // getting the 9
+            cur.setNext(prev); // setting the current to the old / should be next since it's a poitner
+            // reverse changes the pointing/ where it's referring to, not the value inside
+            prev = cur;
+            cur = newNode;
+        }
+        _head = prev; // the last node
+
     }
 
     /**
@@ -108,6 +196,37 @@ public class LinkedList {
      */
     public void merge(LinkedList list2) {
         // TODO
+        // cycle through by making while loop
+        if (list2.isEmpty()){
+            return;
+        }
+        Node a = _head;
+        Node b = list2._head;
+        _head = b;
+        // looping through the list2 since it'll be shorter
+        while(b != null){
+            // alternates so it's a again
+            b.setNext(a); // merging the two lists together
+            Node newA = a.getNext();
+            Node newB = b.getNext();
+            //then alternate so that it's b next
+            if(newB != null){
+                a.setNext(newB);
+            }
+            // when nextB reached null/tail, so just adding the rest of a
+            else{
+                a.setNext(newA);
+            }
+            //increment the a's and b's
+            a = newA;
+            b = newB;
+
+            _size += list2._size;
+            //removes all the content
+            list2.clear();
+
+
+        }
     }
 
 

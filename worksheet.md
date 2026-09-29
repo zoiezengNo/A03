@@ -1,7 +1,7 @@
 # A3 Worksheet: Design Document for the Linked List
 
-**Name:**
-**Onyen:**
+**Name:Zoie Zeng**
+**Onyen:zoiezeng**
 
 Six sections, 15 points. Fill this in **before** you write any code. It is a design document, so it says what your methods must do and what must stay true, not how you will write them. Everything you need is in `README.md`. Keep it short: the whole document should fit on about one page. Write your answers directly under each prompt.
 
@@ -11,6 +11,14 @@ Six sections, 15 points. Fill this in **before** you write any code. It is a des
 
 In two or three sentences, describe the problem this assignment asks you to solve. Say what the six new methods let a program do with a list of whole numbers, and whether they build new lists or change the ones they are given.
 
+We're adding methods to LinkedList so it'll be more flexible and versatile. We're using linkedLink because it's faster insertion and
+deletion since arrays you have to shift everything if you want to insert an element, etc. In this assignment we're suppose to code
+simpleMerge, removeAtIndex, isEqual, removeRepeats, reverse, and merge. SimpleMerge will take a list and the current list will be supplemented
+
+List of Whole Integers = [1,2,3,4,5,6,7]
+at the end of the list given. So they just change the ones we're given and makes the other list null.
+RemoveAtIndex will remove the object/reference at the index given. This will just change
+the ones they're given.
 ```
 
 ```
