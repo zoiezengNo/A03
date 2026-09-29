@@ -208,7 +208,7 @@ public class LinkedList {
         _head = b;
 
         // looping through the list2 since it'll be shorter
-        while(a != null && b != null){
+        while(b != null){
             // alternates so it's a again
             b.setNext(a); // merging the two lists together
             Node newA = a.getNext();
@@ -224,11 +224,6 @@ public class LinkedList {
             //increment the a's and b's
             a = newA;
             b = newB;
-
-
-
-
-
 
         }
         _size += list2._size;
