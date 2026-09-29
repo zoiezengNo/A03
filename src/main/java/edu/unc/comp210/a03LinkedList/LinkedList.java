@@ -85,8 +85,9 @@ public class LinkedList {
             if(tem == _tail){
                 _tail = prev;
             }
-            _size --;
+
         }
+        _size --;
 
 
     }
@@ -144,6 +145,7 @@ public class LinkedList {
                 }
                 // remove the repeat and point to new object
                 cur.setNext(cur.getNext().getNext());
+                _size--;
             }
             //since this means that the values ajacent isn't equal
             else {
@@ -200,11 +202,13 @@ public class LinkedList {
         if (list2.isEmpty()){
             return;
         }
+
         Node a = _head;
         Node b = list2._head;
         _head = b;
+
         // looping through the list2 since it'll be shorter
-        while(b != null){
+        while(a != null && b != null){
             // alternates so it's a again
             b.setNext(a); // merging the two lists together
             Node newA = a.getNext();
@@ -221,12 +225,14 @@ public class LinkedList {
             a = newA;
             b = newB;
 
-            _size += list2._size;
-            //removes all the content
-            list2.clear();
+
+
+
 
 
         }
+        _size += list2._size;
+        list2.clear(); //removes all the content
     }
 
 
