@@ -202,31 +202,41 @@ public class LinkedList {
         if (list2.isEmpty()){
             return;
         }
+        if(this.isEmpty()){
+            _head = list2._head;
+            _tail = list2._tail;
+            _size = list2._size;
+            list2.clear();
+            return;
+        }
 
         Node a = _head;
         Node b = list2._head;
         _head = b;
 
+        int list2S = list2._size;
         // looping through the list2 since it'll be shorter
-        while(b != null){
+        while(a != null && b != null){
             // alternates so it's a again
-            b.setNext(a); // merging the two lists together
+
             Node newA = a.getNext();
             Node newB = b.getNext();
+            b.setNext(a); // merging the two lists together
             //then alternate so that it's b next
             if(newB != null){
                 a.setNext(newB);
             }
             // when nextB reached null/tail, so just adding the rest of a
-            else{
-                a.setNext(newA);
-            }
             //increment the a's and b's
             a = newA;
             b = newB;
 
         }
-        _size += list2._size;
+        _size += list2S;
+
+        if(a == null){
+            _tail = list2._tail;
+        }
         list2.clear(); //removes all the content
     }
 
